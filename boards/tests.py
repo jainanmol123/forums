@@ -92,8 +92,8 @@ class NewTopicTests(TestCase):
     def test_new_topic_valid_post_data(self):
         url = reverse('new_topic', kwargs={'pk': 1})
         data = {
-            'subject': 'Test Title',
-            'message': 'Django is the Awesome'
+            'subject': 'Test title',
+            'message': 'Lorem ipsum dolor sit amet'
         }
         response = self.client.post(url, data)
         self.assertTrue(Topic.objects.exists())
@@ -105,12 +105,12 @@ class NewTopicTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
     def test_new_topic_invalid_post_data_empty_fields(self):
-        url = reverse('new_topic', kwargs={'pk':1})
+        url = reverse('new_topic', kwargs={'pk': 1})
         data = {
             'subject': '',
             'message': ''
         }
-        response = self.client.post(url,data)
+        response = self.client.post(url, data)
         self.assertEquals(response.status_code, 200)
         self.assertFalse(Topic.objects.exists())
         self.assertFalse(Post.objects.exists())
