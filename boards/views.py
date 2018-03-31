@@ -21,19 +21,10 @@ def new_topic(request, pk):
     if request.method == 'POST':
         form = NewTopicForm(request.POST)
         if form.is_valid():
-            topic = form.save(commit=False)
-            topic.board = board
-            topic.starter = user
-            topic.save()
-            post = Post.objects.create(
-                message=form.cleaned_data.get('message'),
-                topic=topic,
-                created_by=user
-            )
-
+            topic = form.save()
             return redirect('board_topics', pk=board.pk)
 
-        else:
-            form = NewTopicForm()
+    else:
+        form = NewTopicForm()
 
-    return render(request, 'new_topic.html', {'board': board, 'form':form})
+    return render(request, 'new_topic.html', {'form':form})
