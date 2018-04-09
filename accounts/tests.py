@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.test import TestCase
 from django.core.urlresolvers import reverse
@@ -26,3 +27,26 @@ class SignUpTests(TestCase):
     def test_contains_form(self):
         form = self.response.context.get('form')
         self.assertIsInstance(form, UserCreationForm)
+
+
+class SuccessfulSignUpTests(TestCase):
+    def setUp(self):
+        url = reverse('signup')
+        data = {
+            'username': 'john',
+            'password1': 'qwertyuiop12',
+            'password2': 'qwertyuiop12'
+        }
+        self.response = self.client.post(url,data)
+        self.home_url = reverse('home')
+
+    def test_redirection(self):
+        self.assertRedirects(self.response, self.home_url)
+
+    def test_user_creation(self):
+        self.assertTrue(User.objects.exists())
+
+    def test_user_authentication(self):
+        response = self.client.get(self.home_url)
+        user = response.context.get('user')
+        self.assertTrue(user.is_authenticated)
