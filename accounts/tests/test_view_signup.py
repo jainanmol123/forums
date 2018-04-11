@@ -31,7 +31,7 @@ class SignUpTests(TestCase):
 
     def test_form_inputs(self):
         self.assertContains(self.response, '<input', 5)
-        self.assertContains(self.response, 'type="test"', 1)
+        self.assertContains(self.response, 'type="text"', 1)
         self.assertContains(self.response, 'type="email"', 1)
         self.assertContains(self.response, 'type="password"', 2)
 
