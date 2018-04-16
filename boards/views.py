@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.views.generic import UpdateView, ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
@@ -37,7 +38,18 @@ class BoardListView(ListView):
 
 def board_topics(request, pk):
     board = get_object_or_404(Board, pk=pk)
-    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts')-1)
+    queryset = board.topics.order_by('-last_updated').annotate(replies=Count('posts')-1)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(queryset, 20)
+
+    try:
+        topics = paginator.page(page)
+    except PageNotAnInteger:
+        topics = paginator.page(1)
+    except EmptyPage:
+        topics = paginator.page(paginator.num_pages)
+
     return render(request, 'topics.html', {'board':board, 'topics':topics})
 
 @login_required
