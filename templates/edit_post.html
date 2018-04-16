@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
   Edit Post
+{% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'js/simplemde.min.js' %}"></script>
+  <script>
+    var simplemde = new SimpleMDE();
+  </script>
 {% endblock %}
 
 {% block breadcrumb %}
@@ -12,7 +25,7 @@
 {% endblock %}
 
 {% block content %}
-  <form class="mb-4" method="post">
+  <form class="mb-4" method="post" novalidate>
     {% csrf_token %}
     {% include "includes/form.html" %}
     <button type="submit" class="btn btn-success">Save Changes</button>
