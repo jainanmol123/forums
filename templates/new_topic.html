@@ -3,13 +3,13 @@
 {% load widget_tweaks %}
 
 {% block title %}
-  Start a New Topic
+  Start a New Thread
 {% endblock %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item"> <a href="{% url 'home' %}">Boards</a> </li>
+  <li class="breadcrumb-item"> <a href="{% url 'home' %}">Forums</a> </li>
   <li class="breadcrumb-item"> <a href="{% url 'board_topics' board.pk %}">{{board.name}}</a> </li>
-  <li class="breadcrumb-item active">New topic</li>
+  <li class="breadcrumb-item active">New Thread</li>
 {% endblock %}
 
 {% block content %}

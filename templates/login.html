@@ -1,7 +1,7 @@
 {% extends "base_accounts.html" %}
 
 {% block title %}
-  Log In to Django Boards
+  Log In to The Forums
 {% endblock %}
 
 {% block content %}
@@ -18,12 +18,12 @@
           </form>
         </div>
         <div class="card-footer text-muted text-center">
-          New to Django Boards? <a href={% url 'signup' %}>Sign Up</a>
+          New to The Forums? <a href={% url 'signup' %}>Sign Up</a>
         </div>
       </div>
       <div class="text-center py-2">
         <small>
-          <a href="#" class="text-muted">Awww, Forgot Your Password?</a>
+          <a href={% url 'password_reset' %} class="text-muted">Awww, Forgot Your Password?</a>
         </small>
       </div>
     </div>
