@@ -144,3 +144,5 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 
 DEFAULT_FROM_EMAIL = 'The Forum <noreply@theforums.com'
 EMAIL_SUBJECT_PREFIX = '[The Forums]'
+
+#Update to Django 2.0
